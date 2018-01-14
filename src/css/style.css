@@ -1,0 +1,77 @@
+html, body {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+#calendar {
+    width: 620px;
+    height: 720px;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+#calendar .calendar-timer {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    padding-right: 10px;
+    font-size: .8em;
+}
+
+#calendar .calendar-timer .calendar-timer-block {
+    height: 8.3%;
+}
+
+#calendar .calendar-timer .calendar-timer-block >div {
+    height: 50%;
+}
+
+#calendar .calendar-timer .timer .time {
+    padding-right: 5px;
+    font-weight: 600;
+    color: rgb(80, 80, 80);
+}
+
+#calendar .calendar-timer .timer .indicator {
+    text-transform: uppercase;
+    font-size: .8em;
+    color: #bebebe;
+}
+
+#calendar .calendar-timer .timer-center {
+    align-self: center;
+    font-size: .7em;
+    color: #bebebe;
+}
+
+#calendar #calendar-scheduler {
+    flex-grow: 20;
+    border-left: 1px solid #bebebe;
+    background-color: lightgray;
+    position: relative;
+    display: flex;
+    overflow: scroll;
+    padding: 0 5px;
+}
+
+#calendar #calendar-scheduler .event {
+    position: absolute;
+    z-index: 3;
+    left: -1px;
+    flex-shrink: 0;
+    float: left;
+    background-color: white;
+    margin: 5px 5px;
+    border: 1px solid #bebebe;
+    border-left: 4px solid #4AAF88;
+    width: 150px;
+    padding: 5px 10px 0 10px;
+    color: #bebebe;
+}
+
+#calendar #calendar-scheduler .event span.title {
+    color: #4AAF88;
+    font-weight: 600;
+}
