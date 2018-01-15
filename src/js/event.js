@@ -111,8 +111,4 @@ var CalendarEvent = (function() {
         return s >= ss && e <= ee || s <= ss && e >= ee || s >= ss && s <= ee || s >= ss && e <= ee;
     }
 
-    function _Unique(value, index, self) { 
-        return self.indexOf(value) === index;
-    }
-
 })();
