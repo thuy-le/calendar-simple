@@ -25,10 +25,13 @@ var Calendar = (
             var eventUnitHeight = this.containerHeight / (this.dayEndInMinute - this.dayStartInMinute);
 
             this.calendarEvents.forEach((e, index) => {
-                var top = e.start;
-                var height = eventUnitHeight * (e.end - e.start);
+                var t = e.start;
+                var h = eventUnitHeight * (e.end - e.start);
+                var l = e.getOffset() * e.getWidth();
 
-                html += `<div class='event' style='top: ${top}px; height: ${height}px; left: ${e.getLeftPosition()}px'>`;
+                var style = `style='top: ${t}px; height: ${h}px; left: ${l}%; width: calc(${e.getWidth()}% - 26px)'`;
+
+                html += `<div class='event' ${style}>`;
                 html += `<span class='title'>Sample Item</span><br/>`;
                 html += `<span>Sample Location</span>`;
                 html += `</div>`;
@@ -38,8 +41,9 @@ var Calendar = (
         }
 
         Calendar.prototype.convertEvents = function() {
-            this.calendarEvents = this.events.map(e => new CalendarEvent(e.start, e.end));
-            this.calendarEvents = this.calendarEvents.map((e, idx) => e.calcOverlap(this.calendarEvents, idx));
+            this.calendarEvents = this.events.map((e, idx) => new CalendarEvent(e.start, e.end, idx));
+            this.calendarEvents = this.calendarEvents.map((e) => e.calcOffset(this.calendarEvents));
+            this.calendarEvents = this.calendarEvents.map((e) => e.calcWidth(this.calendarEvents));
         }
 
         Calendar.prototype.validate = function() {

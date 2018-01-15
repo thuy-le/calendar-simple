@@ -63,10 +63,9 @@ html, body {
     flex-shrink: 0;
     float: left;
     background-color: white;
-    margin: 5px 5px;
+    margin: 5px 0;
     border: 1px solid #bebebe;
     border-left: 4px solid #4AAF88;
-    width: 150px;
     padding: 5px 10px 0 10px;
     color: #bebebe;
 }

@@ -22,7 +22,7 @@ var Validator = (function() {
 
         startLabel = startLabel || "start";
         endLabel = endLabel || "end";
-        
+
         if (this.schema[startLabel] == null || this.schema[endLabel] == null) {
             this.validationError = new Error("invalid range");
         }
