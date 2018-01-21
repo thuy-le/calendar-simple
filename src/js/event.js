@@ -51,31 +51,17 @@ var CalendarEvent = (function() {
         return this.W;
     }
 
-    CalendarEvent.prototype.calcOffset = function(events) {
-        events.forEach((e) => {
-            if (e.getId() < this.getId() && _isOverlap(this.start, e.getStart(), this.end, e.getEnd())) {
-                this.setOverlap();
-                this.addOverlap(e);
-
-                var doubleOverlap = [];
-                if (e.countOverlap() > 0) {
-                    e.getOverlap().forEach((eo) => {
-                        if (eo.getId() < this.getId() && _isOverlap(this.start, eo.getStart(), this.end, eo.getEnd())) {
-                            doubleOverlap.push(eo);
-                        }
-                    });
-
-                    if (doubleOverlap.length > 0) {
-                        this.offset = (this.countOverlap() + doubleOverlap.length);
-                    }
-
-                    [].push.apply(this.overlapWith, doubleOverlap);
-
-                } else {
-                    this.offset = this.countOverlap();
-                }
+    CalendarEvent.prototype.calcOffset = function() {
+        if (this.countOverlap() <= 0) {
+            return this;
+        }
+        this.getOverlap().forEach((ol) => {
+            if (ol.getId() < this.getId()) {
+                this.offset++;
             }
         });
+        this.setOverlap();
+        console.log(this);
         return this;
     }
 
@@ -95,7 +81,7 @@ var CalendarEvent = (function() {
             overlapElems += 1;
             this.getOverlap().forEach(o => {
                 if (this.getOverlap().some(e => (e.getId() !== o.getId()) 
-                    && _isOverlap(o.getStart(), e.getStart(), o.getEnd(), e.getEnd()))) {
+                    && Util.isOverlap(o.getStart(), e.getStart(), o.getEnd(), e.getEnd()))) {
                     overlapElems += 1;
                 }
             });
@@ -107,8 +93,10 @@ var CalendarEvent = (function() {
 
     return CalendarEvent;
 
-    function _isOverlap(s, ss, e, ee) {
-        return s >= ss && e <= ee || s <= ss && e >= ee || s >= ss && s <= ee || s >= ss && e <= ee;
+    function _addUnique(evts, el) {
+        if (!evts.some((e) => e.getId() === el.getId())) {
+            evts.push(el);
+        }
     }
 
 })();

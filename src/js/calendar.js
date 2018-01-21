@@ -18,6 +18,7 @@ var Calendar = (
             this.validate();
             this.buildTemplate();
             this.convertEvents();
+            console.log(this.calendarEvents);
         }
 
         Calendar.prototype.render = function() {
@@ -32,8 +33,8 @@ var Calendar = (
                 var style = `style='top: ${t}px; height: ${h}px; left: ${l}%; width: calc(${e.getWidth()}% - 26px)'`;
 
                 html += `<div class='event' ${style}>`;
-                html += `<span class='title'>Sample Item</span><br/>`;
-                html += `<span>Sample Location</span>`;
+                html += `<span class='title'>Sample Item ${e.id}</span><br/>`;
+                html += `<span>Sample Location ${e.start} ${e.end}</span>`;
                 html += `</div>`;
             });
 
@@ -41,9 +42,8 @@ var Calendar = (
         }
 
         Calendar.prototype.convertEvents = function() {
-            this.calendarEvents = this.events.map((e, idx) => new CalendarEvent(e.start, e.end, idx));
-            this.calendarEvents = this.calendarEvents.map((e) => e.calcOffset(this.calendarEvents));
-            this.calendarEvents = this.calendarEvents.map((e) => e.calcWidth(this.calendarEvents));
+            var manager = new CalendarEventManager(this.events);
+            this.calendarEvents = manager.buildEvents();
         }
 
         Calendar.prototype.validate = function() {

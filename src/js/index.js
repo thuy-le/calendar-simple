@@ -21,6 +21,19 @@ var layOutDay = (
 )();
 
 window.onload = function() {
-    /* Add your logic here */
-    layOutDay([{start: 30, end: 150}, {start: 30, end: 150}, {start: 540, end: 600}, {start: 560, end: 620}, {start: 610, end: 670}]);
+    layOutDay([
+        {start: 479, end: 627}, 
+        {start: 282, end: 613},
+        {start: 81, end: 125}, 
+        {start: 355, end: 643},
+        {start: 195, end: 305}, 
+        {start: 460, end: 675},
+        {start: 618, end: 719}, 
+        // {start: 30, end: 150},
+        // {start: 30, end: 150}, 
+        // {start: 30, end: 150}, 
+        // {start: 540, end: 600}, 
+        // {start: 560, end: 620}, 
+        // {start: 610, end: 670}
+    ]);
 }
